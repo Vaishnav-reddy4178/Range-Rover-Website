@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Range Rover | Redefine Luxury</title>
+  <meta name="description" content="Explore the world of Range Rover — luxury SUVs redefining performance, elegance, and capability. Book a test drive today.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="brand-icon">🏆</div>
+    <h1>RANGE ROVER</h1>
+  </a>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="details.html">Models</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="register.html" class="nav-cta">Register</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 1970 · British Luxury</div>
+    <h1 class="hero-title">Redefine <span>Luxury.</span><br>Explore Range Rover.</h1>
+    <p class="hero-subtitle">Experience unparalleled performance, sophistication, and innovation in every journey. The pinnacle of luxury SUV engineering.</p>
+    <div class="hero-buttons">
+      <a href="details.html" class="btn-primary">Explore Models</a>
+      <a href="gallery.html" class="btn-outline">View Gallery</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item fade-in">
+    <div class="stat-number" data-target="54">0</div>
+    <div class="stat-label">Years of Excellence</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-number" data-target="170">0</div>
+    <div class="stat-label">Countries Worldwide</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-number" data-target="5">0</div>
+    <div class="stat-label">Iconic Models</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-number" data-target="300">0</div>
+    <div class="stat-label">Awards Won</div>
+  </div>
+</div>
+
+<!-- FEATURED MODELS -->
+<section class="section models-section">
+  <div class="section-header">
+    <div class="section-tag">Our Collection</div>
+    <h2 class="section-title">Iconic Models</h2>
+    <div class="section-line"></div>
+    <p class="section-desc">Each Range Rover is a masterpiece — engineered for those who refuse to compromise between performance and luxury.</p>
+  </div>
+  <div class="models-grid">
+    <div class="model-card fade-in" onclick="openModal('evoque')">
+      <div class="model-card-img">
+        <img src="evoque.jpg" alt="Range Rover Evoque">
+        <div class="model-card-overlay"></div>
+        <div class="model-card-badge">Diesel</div>
+      </div>
+      <div class="model-card-body">
+        <div class="model-card-name">Range Rover Evoque</div>
+        <div class="model-card-price">₹67,00,000</div>
+        <div class="model-card-specs">
+          <div class="spec-item"><span class="spec-value">213</span><span class="spec-label">km/h Top Speed</span></div>
+          <div class="spec-item"><span class="spec-value">8.5s</span><span class="spec-label">0–100 km/h</span></div>
+          <div class="spec-item"><span class="spec-value">1997cc</span><span class="spec-label">Engine</span></div>
+        </div>
+        <div class="model-card-footer">
+          <button class="btn-sm btn-gold" onclick="event.stopPropagation();openModal('evoque')">View Details</button>
+          <button class="btn-sm btn-ghost" onclick="event.stopPropagation();bookTestDrive('Range Rover Evoque')">Test Drive</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-card fade-in" onclick="openModal('sport')">
+      <div class="model-card-img">
+        <img src="sport.jpg" alt="Range Rover Sport">
+        <div class="model-card-overlay"></div>
+        <div class="model-card-badge">Petrol</div>
+      </div>
+      <div class="model-card-body">
+        <div class="model-card-name">Range Rover Sport</div>
+        <div class="model-card-price">₹87,00,000</div>
+        <div class="model-card-specs">
+          <div class="spec-item"><span class="spec-value">234</span><span class="spec-label">km/h Top Speed</span></div>
+          <div class="spec-item"><span class="spec-value">5.9s</span><span class="spec-label">0–100 km/h</span></div>
+          <div class="spec-item"><span class="spec-value">2997cc</span><span class="spec-label">Engine</span></div>
+        </div>
+        <div class="model-card-footer">
+          <button class="btn-sm btn-gold" onclick="event.stopPropagation();openModal('sport')">View Details</button>
+          <button class="btn-sm btn-ghost" onclick="event.stopPropagation();bookTestDrive('Range Rover Sport')">Test Drive</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-card fade-in" onclick="openModal('velar')">
+      <div class="model-card-img">
+        <img src="velar.jpg" alt="Range Rover Velar">
+        <div class="model-card-overlay"></div>
+        <div class="model-card-badge">Petrol</div>
+      </div>
+      <div class="model-card-body">
+        <div class="model-card-name">Range Rover Velar</div>
+        <div class="model-card-price">₹1,40,00,000</div>
+        <div class="model-card-specs">
+          <div class="spec-item"><span class="spec-value">210</span><span class="spec-label">km/h Top Speed</span></div>
+          <div class="spec-item"><span class="spec-value">8.3s</span><span class="spec-label">0–100 km/h</span></div>
+          <div class="spec-item"><span class="spec-value">1997cc</span><span class="spec-label">Engine</span></div>
+        </div>
+        <div class="model-card-footer">
+          <button class="btn-sm btn-gold" onclick="event.stopPropagation();openModal('velar')">View Details</button>
+          <button class="btn-sm btn-ghost" onclick="event.stopPropagation();bookTestDrive('Range Rover Velar')">Test Drive</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-card fade-in" onclick="openModal('defender')">
+      <div class="model-card-img">
+        <img src="defender.jpg" alt="Defender">
+        <div class="model-card-overlay"></div>
+        <div class="model-card-badge">Diesel</div>
+      </div>
+      <div class="model-card-body">
+        <div class="model-card-name">Defender</div>
+        <div class="model-card-price">₹1,47,00,000</div>
+        <div class="model-card-specs">
+          <div class="spec-item"><span class="spec-value">240</span><span class="spec-label">km/h Top Speed</span></div>
+          <div class="spec-item"><span class="spec-value">5.7s</span><span class="spec-label">0–100 km/h</span></div>
+          <div class="spec-item"><span class="spec-value">4500cc</span><span class="spec-label">Engine</span></div>
+        </div>
+        <div class="model-card-footer">
+          <button class="btn-sm btn-gold" onclick="event.stopPropagation();openModal('defender')">View Details</button>
+          <button class="btn-sm btn-ghost" onclick="event.stopPropagation();bookTestDrive('Defender')">Test Drive</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features-section">
+  <div class="section-header">
+    <div class="section-tag">Why Range Rover</div>
+    <h2 class="section-title">The Range Rover Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card fade-in">
+      <div class="feature-icon">⚡</div>
+      <h3>Unmatched Performance</h3>
+      <p>Advanced chassis engineering and powerful engines deliver extraordinary performance on any terrain, from city streets to mountain trails.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">💎</div>
+      <h3>Luxury Interior</h3>
+      <p>Handcrafted with the finest leather, polished wood veneers, and premium metals — every surface exudes sophistication and artisanship.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🛰️</div>
+      <h3>Advanced Technology</h3>
+      <p>State-of-the-art infotainment, AI driver assistance, and seamless connectivity redefine what it means to be truly smart on the road.</p>
+    </div>
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🌿</div>
+      <h3>Sustainable Future</h3>
+      <p>Range Rover's electrified lineup and sustainable materials demonstrate our commitment to luxury that respects the planet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / QUERY SECTION -->
+<section class="section contact-section" id="contact">
+  <div class="section-header">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="section-title">Contact Us</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Experience the Legend</h3>
+      <p>Range Rover is a British luxury car brand known for its excellence in design, innovation, and performance. Established in 1970, Range Rover has become synonymous with sophistication, off-road capability, and cutting-edge technology.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Showroom</span>
+          <span class="contact-detail-value">Land Rover India, Connaught Place, New Delhi</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Phone</span>
+          <span class="contact-detail-value">+91 1800 419 2680</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-value">info@rangerover.in</span>
+        </div>
+      </div>
+    </div>
+    <div class="premium-form">
+      <h3>Send a Query</h3>
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" id="contactPhone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="contactModel">Interested Model</label>
+          <select id="contactModel">
+            <option value="">Select a model</option>
+            <option>Range Rover Evoque</option>
+            <option>Range Rover Sport</option>
+            <option>Range Rover Velar</option>
+            <option>Defender</option>
+            <option>Range Rover Classic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Your Message</label>
+          <textarea id="contactMessage" placeholder="Tell us how we can help..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>RANGE ROVER</h2>
+      <p>Since 1970, Range Rover has been the benchmark for luxury, performance, and capability — forging a path where no ordinary vehicle dares to follow.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Models</h4>
+      <ul>
+        <li><a href="details.html">Evoque</a></li>
+        <li><a href="details.html">Sport</a></li>
+        <li><a href="details.html">Velar</a></li>
+        <li><a href="details.html">Defender</a></li>
+        <li><a href="details.html">Classic</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Showroom</h4>
+      <ul>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="details.html">Car Details</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Heritage</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Range Rover. All Rights Reserved.</span>
+    <span>British Luxury Since 1970</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div class="model-price" id="modalPrice"></div>
+    <table class="spec-table" id="modalSpecs"></table>
+    <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+      <button class="btn-primary" id="modalTestDrive" style="flex:1;text-align:center;">Book Test Drive</button>
+      <button class="btn-outline" id="modalBookNow" style="flex:1;text-align:center;padding:15px;">Book Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-title" id="toastTitle"></div>
+  <div id="toastBody"></div>
+</div>
+
+<script src="scripts.js"></script>
+</body>
+</html>

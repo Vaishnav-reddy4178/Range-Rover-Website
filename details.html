@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Models – Range Rover Showroom</title>
+  <meta name="description" content="Explore all Range Rover models — Evoque, Sport, Velar, Defender and Classic. View specs and book your test drive.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .details-hero { padding:140px 60px 80px; text-align:center; background:var(--dark-2); }
+    .filter-bar { display:flex; gap:12px; justify-content:center; margin-bottom:50px; flex-wrap:wrap; }
+    .filter-btn { padding:10px 24px; border-radius:2px; border:1px solid rgba(255,255,255,0.12); background:transparent; color:#999; font-family:'Outfit',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+    .filter-btn.active,.filter-btn:hover { background:var(--gold); color:var(--dark); border-color:var(--gold); }
+    .full-model-card { background:var(--dark-3); border:1px solid rgba(255,255,255,0.05); border-radius:8px; overflow:hidden; margin-bottom:40px; display:grid; grid-template-columns:1fr 1fr; transition:border-color 0.4s; }
+    .full-model-card:hover { border-color:rgba(201,168,76,0.25); }
+    .full-model-card.reverse { direction:rtl; }
+    .full-model-card.reverse > * { direction:ltr; }
+    .fmc-image { position:relative; height:420px; overflow:hidden; }
+    .fmc-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
+    .full-model-card:hover .fmc-image img { transform:scale(1.05); }
+    .fmc-badge { position:absolute; top:20px; left:20px; background:var(--gold); color:var(--dark); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:2px; }
+    .fmc-body { padding:50px 48px; display:flex; flex-direction:column; justify-content:center; }
+    .fmc-tag { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .fmc-name { font-family:'Playfair Display',serif; font-size:36px; color:var(--white); margin-bottom:10px; }
+    .fmc-price { font-size:22px; font-weight:600; color:var(--gold); margin-bottom:24px; }
+    .fmc-desc { color:#999; font-size:14px; line-height:1.8; margin-bottom:28px; }
+    .spec-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
+    .spec-box { background:var(--dark-2); border-radius:4px; padding:16px; text-align:center; }
+    .spec-box .val { font-size:18px; font-weight:700; color:var(--white); }
+    .spec-box .lbl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-top:4px; }
+    .fmc-actions { display:flex; gap:12px; flex-wrap:wrap; }
+    @media(max-width:800px) {
+      .full-model-card { grid-template-columns:1fr; }
+      .full-model-card.reverse { direction:ltr; }
+      .fmc-image { height:260px; }
+      .fmc-body { padding:32px 24px; }
+      .details-hero { padding:120px 24px 60px; }
+      .spec-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="brand-icon">🏆</div>
+    <h1>RANGE ROVER</h1>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="details.html" class="active">Models</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="register.html" class="nav-cta">Register</a>
+  </nav>
+</header>
+
+<div class="details-hero">
+  <div class="section-tag">Our Fleet</div>
+  <h1 class="section-title">Range Rover Models</h1>
+  <div class="section-line"></div>
+  <p class="section-desc">Every model is an expression of purpose, beauty, and engineering mastery.</p>
+</div>
+
+<section class="section" style="background:var(--dark-2);padding-top:30px;">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all',this)">All Models</button>
+    <button class="filter-btn" onclick="filterCards('diesel',this)">Diesel</button>
+    <button class="filter-btn" onclick="filterCards('petrol',this)">Petrol</button>
+  </div>
+
+  <!-- EVOQUE -->
+  <div class="full-model-card fade-in" data-type="diesel">
+    <div class="fmc-image">
+      <img src="evoque.jpg" alt="Range Rover Evoque">
+      <div class="fmc-badge">Diesel</div>
+    </div>
+    <div class="fmc-body">
+      <div class="fmc-tag">Compact Luxury SUV</div>
+      <div class="fmc-name">Range Rover Evoque</div>
+      <div class="fmc-price">₹67,00,000</div>
+      <p class="fmc-desc">The Range Rover Evoque is the most innovative Land Rover ever. Its distinctive design, urban agility, and off-road capability make it the perfect companion for modern life.</p>
+      <div class="spec-grid">
+        <div class="spec-box"><div class="val">1997cc</div><div class="lbl">Engine</div></div>
+        <div class="spec-box"><div class="val">15 km/l</div><div class="lbl">Mileage</div></div>
+        <div class="spec-box"><div class="val">213 km/h</div><div class="lbl">Top Speed</div></div>
+        <div class="spec-box"><div class="val">8.5s</div><div class="lbl">0–100 km/h</div></div>
+        <div class="spec-box"><div class="val">Auto</div><div class="lbl">Transmission</div></div>
+        <div class="spec-box"><div class="val">Diesel</div><div class="lbl">Fuel</div></div>
+      </div>
+      <div class="fmc-actions">
+        <button class="btn-primary" onclick="bookTestDrive('Range Rover Evoque')">Book Test Drive</button>
+        <button class="btn-outline" style="padding:15px 28px;" onclick="bookCar('Range Rover Evoque')">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPORT -->
+  <div class="full-model-card reverse fade-in" data-type="petrol">
+    <div class="fmc-image">
+      <img src="sport.jpg" alt="Range Rover Sport">
+      <div class="fmc-badge">Petrol / Diesel</div>
+    </div>
+    <div class="fmc-body">
+      <div class="fmc-tag">Performance SUV</div>
+      <div class="fmc-name">Range Rover Sport</div>
+      <div class="fmc-price">₹87,00,000</div>
+      <p class="fmc-desc">Built for those who drive with passion. The Range Rover Sport combines dramatic design with class-leading performance and agile handling for an exhilarating experience.</p>
+      <div class="spec-grid">
+        <div class="spec-box"><div class="val">2997cc</div><div class="lbl">Engine</div></div>
+        <div class="spec-box"><div class="val">12 km/l</div><div class="lbl">Mileage</div></div>
+        <div class="spec-box"><div class="val">234 km/h</div><div class="lbl">Top Speed</div></div>
+        <div class="spec-box"><div class="val">5.9s</div><div class="lbl">0–100 km/h</div></div>
+        <div class="spec-box"><div class="val">Auto</div><div class="lbl">Transmission</div></div>
+        <div class="spec-box"><div class="val">Petrol/Diesel</div><div class="lbl">Fuel</div></div>
+      </div>
+      <div class="fmc-actions">
+        <button class="btn-primary" onclick="bookTestDrive('Range Rover Sport')">Book Test Drive</button>
+        <button class="btn-outline" style="padding:15px 28px;" onclick="bookCar('Range Rover Sport')">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VELAR -->
+  <div class="full-model-card fade-in" data-type="petrol">
+    <div class="fmc-image">
+      <img src="velar.jpg" alt="Range Rover Velar">
+      <div class="fmc-badge">Petrol</div>
+    </div>
+    <div class="fmc-body">
+      <div class="fmc-tag">Mid-Size Luxury SUV</div>
+      <div class="fmc-name">Range Rover Velar</div>
+      <div class="fmc-price">₹1,40,00,000</div>
+      <p class="fmc-desc">A visually striking presence with a minimalist, ultra-premium interior. The Velar introduces a new dimension of glamour and technological sophistication to the Range Rover family.</p>
+      <div class="spec-grid">
+        <div class="spec-box"><div class="val">1997cc</div><div class="lbl">Engine</div></div>
+        <div class="spec-box"><div class="val">15.8 km/l</div><div class="lbl">Mileage</div></div>
+        <div class="spec-box"><div class="val">210 km/h</div><div class="lbl">Top Speed</div></div>
+        <div class="spec-box"><div class="val">8.3s</div><div class="lbl">0–100 km/h</div></div>
+        <div class="spec-box"><div class="val">Auto</div><div class="lbl">Transmission</div></div>
+        <div class="spec-box"><div class="val">Petrol</div><div class="lbl">Fuel</div></div>
+      </div>
+      <div class="fmc-actions">
+        <button class="btn-primary" onclick="bookTestDrive('Range Rover Velar')">Book Test Drive</button>
+        <button class="btn-outline" style="padding:15px 28px;" onclick="bookCar('Range Rover Velar')">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFENDER -->
+  <div class="full-model-card reverse fade-in" data-type="diesel">
+    <div class="fmc-image">
+      <img src="defender.jpg" alt="Defender">
+      <div class="fmc-badge">Diesel</div>
+    </div>
+    <div class="fmc-body">
+      <div class="fmc-tag">Legendary Off-Roader</div>
+      <div class="fmc-name">Defender</div>
+      <div class="fmc-price">₹1,47,00,000</div>
+      <p class="fmc-desc">Reborn for a new era. The Defender combines authentic Land Rover DNA with advanced aluminium architecture and state-of-the-art technology for extreme capability on any terrain.</p>
+      <div class="spec-grid">
+        <div class="spec-box"><div class="val">4500cc</div><div class="lbl">Engine</div></div>
+        <div class="spec-box"><div class="val">10 km/l</div><div class="lbl">Mileage</div></div>
+        <div class="spec-box"><div class="val">240 km/h</div><div class="lbl">Top Speed</div></div>
+        <div class="spec-box"><div class="val">5.7s</div><div class="lbl">0–100 km/h</div></div>
+        <div class="spec-box"><div class="val">Auto</div><div class="lbl">Transmission</div></div>
+        <div class="spec-box"><div class="val">Diesel</div><div class="lbl">Fuel</div></div>
+      </div>
+      <div class="fmc-actions">
+        <button class="btn-primary" onclick="bookTestDrive('Defender')">Book Test Drive</button>
+        <button class="btn-outline" style="padding:15px 28px;" onclick="bookCar('Defender')">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASSIC -->
+  <div class="full-model-card fade-in" data-type="petrol">
+    <div class="fmc-image">
+      <img src="classic.jpg" alt="Range Rover Classic">
+      <div class="fmc-badge">Heritage</div>
+    </div>
+    <div class="fmc-body">
+      <div class="fmc-tag">Heritage Icon</div>
+      <div class="fmc-name">Range Rover Classic</div>
+      <div class="fmc-price">₹55,00,000</div>
+      <p class="fmc-desc">The original. The Classic introduced luxury to the world of off-road vehicles in 1970, setting an unrivalled standard that continues to inspire generations of Range Rover design.</p>
+      <div class="spec-grid">
+        <div class="spec-box"><div class="val">3500cc</div><div class="lbl">Engine</div></div>
+        <div class="spec-box"><div class="val">V8</div><div class="lbl">Config</div></div>
+        <div class="spec-box"><div class="val">175 km/h</div><div class="lbl">Top Speed</div></div>
+        <div class="spec-box"><div class="val">11s</div><div class="lbl">0–100 km/h</div></div>
+        <div class="spec-box"><div class="val">Manual</div><div class="lbl">Transmission</div></div>
+        <div class="spec-box"><div class="val">Petrol</div><div class="lbl">Fuel</div></div>
+      </div>
+      <div class="fmc-actions">
+        <button class="btn-primary" onclick="bookTestDrive('Range Rover Classic')">Book Test Drive</button>
+        <button class="btn-outline" style="padding:15px 28px;" onclick="bookCar('Range Rover Classic')">Book Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact" style="background:var(--dark);">
+  <div class="section-header">
+    <div class="section-tag">Questions?</div>
+    <h2 class="section-title">Contact Our Team</h2>
+    <div class="section-line"></div>
+  </div>
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="premium-form">
+      <h3>Send a Query</h3>
+      <form onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Doe" required></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="john@email.com" required></div>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="How can we help?" required></textarea></div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><h2>RANGE ROVER</h2><p>The pinnacle of luxury and performance since 1970.</p></div>
+    <div class="footer-col"><h4>Models</h4><ul><li><a href="#">Evoque</a></li><li><a href="#">Sport</a></li><li><a href="#">Velar</a></li><li><a href="#">Defender</a></li></ul></div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="gallery.html">Gallery</a></li><li><a href="register.html">Register</a></li><li><a href="index.html">Home</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+91 1800 419 2680</a></li><li><a href="#">info@rangerover.in</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 Range Rover. All Rights Reserved.</span><span>British Luxury Since 1970</span></div>
+</footer>
+
+<div class="toast" id="toast"><div class="toast-title" id="toastTitle"></div><div id="toastBody"></div></div>
+<script src="scripts.js"></script>
+</body>
+</html>

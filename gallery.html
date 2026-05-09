@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery – Range Rover Showroom</title>
+  <meta name="description" content="Browse the Range Rover photo gallery — stunning images of Evoque, Sport, Velar, Defender and Classic models.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .gallery-hero { padding:140px 60px 80px; text-align:center; background:var(--dark-2); }
+    .gallery-tabs { display:flex; gap:12px; justify-content:center; margin-bottom:40px; flex-wrap:wrap; }
+    .tab-btn { padding:10px 28px; border-radius:2px; border:1px solid rgba(255,255,255,0.12); background:transparent; color:#999; font-family:'Outfit',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+    .tab-btn.active, .tab-btn:hover { background:var(--gold); color:var(--dark); border-color:var(--gold); }
+    @media(max-width:600px){ .gallery-hero{padding:120px 24px 60px;} }
+  </style>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="brand-icon">🏆</div>
+    <h1>RANGE ROVER</h1>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="details.html">Models</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="register.html" class="nav-cta">Register</a>
+  </nav>
+</header>
+
+<div class="gallery-hero">
+  <div class="section-tag">Visual Journey</div>
+  <h1 class="section-title">Our Gallery</h1>
+  <div class="section-line"></div>
+  <p class="section-desc">Experience Range Rover's iconic design through our curated collection of stunning imagery.</p>
+</div>
+
+<!-- CAROUSEL -->
+<section class="section gallery-section" style="padding-top:20px;">
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <img src="evoque1.jpg" alt="Range Rover Evoque">
+        <div class="carousel-caption"><h3>Range Rover Evoque</h3><p>Compact luxury, boundless capability</p></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="sport1.jpg" alt="Range Rover Sport">
+        <div class="carousel-caption"><h3>Range Rover Sport</h3><p>Power meets sophistication</p></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="velar1.jpg" alt="Range Rover Velar">
+        <div class="carousel-caption"><h3>Range Rover Velar</h3><p>A new dimension of glamour</p></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="defender1.jpg" alt="Defender">
+        <div class="carousel-caption"><h3>Defender</h3><p>Born to go beyond boundaries</p></div>
+      </div>
+      <div class="carousel-slide">
+        <img src="classic.jpg" alt="Range Rover Classic">
+        <div class="carousel-caption"><h3>Range Rover Classic</h3><p>Where it all began</p></div>
+      </div>
+    </div>
+    <button class="carousel-btn carousel-prev" id="carouselPrev" onclick="moveCarousel(-1)">&#8249;</button>
+    <button class="carousel-btn carousel-next" id="carouselNext" onclick="moveCarousel(1)">&#8250;</button>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+
+  <!-- GRID GALLERY -->
+  <div class="section-header" style="margin-top:70px;">
+    <div class="section-tag">All Models</div>
+    <h2 class="section-title">Browse Collection</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="gallery-tabs">
+    <button class="tab-btn active" onclick="filterGallery('all',this)">All</button>
+    <button class="tab-btn" onclick="filterGallery('evoque',this)">Evoque</button>
+    <button class="tab-btn" onclick="filterGallery('sport',this)">Sport</button>
+    <button class="tab-btn" onclick="filterGallery('velar',this)">Velar</button>
+    <button class="tab-btn" onclick="filterGallery('defender',this)">Defender</button>
+    <button class="tab-btn" onclick="filterGallery('classic',this)">Classic</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item fade-in" data-cat="evoque" onclick="openLightbox(this)">
+      <img src="evoque.jpg" alt="Evoque">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Evoque</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="evoque" onclick="openLightbox(this)">
+      <img src="evoque1.jpg" alt="Evoque Interior">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Evoque</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="sport" onclick="openLightbox(this)">
+      <img src="sport.jpg" alt="Sport">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Sport</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="sport" onclick="openLightbox(this)">
+      <img src="sport1.jpg" alt="Sport Side">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Sport</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="velar" onclick="openLightbox(this)">
+      <img src="velar.jpg" alt="Velar">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Velar</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="velar" onclick="openLightbox(this)">
+      <img src="velar1.jpg" alt="Velar Side">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Velar</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="defender" onclick="openLightbox(this)">
+      <img src="defender.jpg" alt="Defender">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Defender</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="defender" onclick="openLightbox(this)">
+      <img src="defender1.jpg" alt="Defender Side">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Defender</span></div>
+    </div>
+    <div class="gallery-item fade-in" data-cat="classic" onclick="openLightbox(this)">
+      <img src="classic.jpg" alt="Classic">
+      <div class="gallery-item-overlay"><span style="font-size:28px">🔍</span><span>Classic</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><h2>RANGE ROVER</h2><p>The pinnacle of luxury and performance since 1970.</p></div>
+    <div class="footer-col"><h4>Models</h4><ul><li><a href="details.html">View All</a></li></ul></div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="register.html">Register</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+91 1800 419 2680</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 Range Rover. All Rights Reserved.</span><span>British Luxury Since 1970</span></div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">✕</button>
+  <img id="lightboxImg" src="" alt="Gallery Image">
+</div>
+
+<div class="toast" id="toast"><div class="toast-title" id="toastTitle"></div><div id="toastBody"></div></div>
+<script src="scripts.js"></script>
+<script>
+let carouselIdx = 0;
+const track = document.getElementById('carouselTrack');
+const slides = track.children;
+const dotsEl = document.getElementById('carouselDots');
+
+function buildDots() {
+  for (let i = 0; i < slides.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goToSlide(i);
+    dotsEl.appendChild(d);
+  }
+}
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === carouselIdx));
+}
+function goToSlide(idx) {
+  carouselIdx = (idx + slides.length) % slides.length;
+  track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+  updateDots();
+}
+function moveCarousel(dir) { goToSlide(carouselIdx + dir); }
+buildDots();
+setInterval(() => moveCarousel(1), 4000);
+
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+function openLightbox(el) {
+  const img = el.querySelector('img');
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+</script>
+</body>
+</html>
