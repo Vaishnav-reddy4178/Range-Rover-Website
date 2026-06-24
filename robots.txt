@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vaishnav-reddy4178.github.io/Range-Rover-Website/sitemap.xml
