@@ -184,3 +184,52 @@ if (regForm && !regForm.getAttribute('onsubmit')) {
     setTimeout(() => { window.location.href = 'details.html'; }, 2000);
   });
 }
+
+// ── PAGE LOADER ────────────────────────────────────────────
+window.addEventListener('load', () => {
+  const loader = document.getElementById('pageLoader');
+  if (loader) {
+    setTimeout(() => loader.classList.add('hidden'), 400);
+    setTimeout(() => loader.remove(), 1000);
+  }
+});
+
+// ── BACK TO TOP ────────────────────────────────────────────
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ── MOBILE MENU ────────────────────────────────────────────
+function toggleMobileMenu() {
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('mobileOverlay').classList.toggle('active');
+  document.getElementById('hamburgerBtn').classList.toggle('active');
+  document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+}
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+if (hamburgerBtn) {
+  hamburgerBtn.addEventListener('click', toggleMobileMenu);
+}
+const mobileOverlay = document.getElementById('mobileOverlay');
+if (mobileOverlay) {
+  mobileOverlay.addEventListener('click', toggleMobileMenu);
+}
+
+// ── SMOOTH SCROLL FOR ANCHOR LINKS ────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    const targetEl = document.querySelector(targetId);
+    if (targetEl) {
+      e.preventDefault();
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});

@@ -27,7 +27,21 @@
     @media(max-width:600px){ .gallery-hero{padding:120px 24px 60px;} }
   </style>
 </head>
-<body>
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader"><div class="loader-ring"></div></div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="details.html">Models</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="compare.html">Compare</a>
+  <a href="register.html" class="nav-cta">Register</a>
+</nav>
 
 <header class="navbar" id="navbar">
   <a href="index.html" class="navbar-brand">
@@ -42,6 +56,9 @@
     <a href="compare.html">Compare</a>
     <a href="register.html" class="nav-cta">Register</a>
   </nav>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <div class="gallery-hero">
@@ -154,6 +171,9 @@
 </div>
 
 <div class="toast" id="toast"><div class="toast-title" id="toastTitle"></div><div id="toastBody"></div></div>
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
 <script src="scripts.js"></script>
 <script>
 let carouselIdx = 0;
