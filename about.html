@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – Range Rover Heritage & Legacy</title>
+  <meta name="description" content="Discover the Range Rover story. From the original 1970 Classic to today's luxury SUVs, explore our British heritage, innovation, and vision for the future.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-hero {
+      position: relative; min-height: 70vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden; padding: 140px 60px 80px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%), url('range-rover-home.jpg') center/cover no-repeat;
+    }
+    .about-hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px);
+      color: var(--white); margin-bottom: 20px; line-height: 1.15;
+    }
+    .about-hero h1 span { color: var(--gold); }
+    .about-hero p {
+      color: rgba(255,255,255,0.75); font-size: 17px; line-height: 1.9; max-width: 700px; margin: 0 auto;
+    }
+
+    .timeline-section { background: var(--dark-2); padding: 100px 60px; }
+    .timeline { position: relative; max-width: 900px; margin: 60px auto 0; }
+    .timeline::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent); transform: translateX(-50%);
+    }
+    .timeline-item { position: relative; padding: 30px 0; width: 50%; }
+    .timeline-item:nth-child(odd) { padding-right: 60px; text-align: right; }
+    .timeline-item:nth-child(even) { margin-left: 50%; padding-left: 60px; }
+    .timeline-item::before {
+      content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--gold); border: 3px solid var(--dark-2); top: 34px;
+    }
+    .timeline-item:nth-child(odd)::before { right: -7px; }
+    .timeline-item:nth-child(even)::before { left: -7px; }
+    .timeline-year {
+      font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); font-weight: 700; margin-bottom: 8px;
+    }
+    .timeline-title { font-size: 18px; color: var(--white); font-weight: 600; margin-bottom: 8px; }
+    .timeline-desc { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+
+    .values-section { background: var(--dark); padding: 100px 60px; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 60px; }
+    .value-card {
+      background: var(--dark-3); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px; padding: 40px 30px; text-align: center;
+      transition: all 0.4s; position: relative; overflow: hidden;
+    }
+    .value-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-color: rgba(201,168,76,0.2); }
+    .value-card:hover::before { transform: scaleX(1); }
+    .value-icon { font-size: 44px; margin-bottom: 18px; }
+    .value-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); margin-bottom: 12px; }
+    .value-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+
+    .stats-section { background: var(--dark-3); padding: 80px 60px; border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; max-width: 1000px; margin: 0 auto; }
+    .stat-box .num { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); font-weight: 700; }
+    .stat-box .lbl { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
+
+    .cta-section { background: var(--dark-2); padding: 100px 60px; text-align: center; }
+    .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 42px); color: var(--white); margin-bottom: 16px; }
+    .cta-section p { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto 36px; line-height: 1.8; }
+
+    @media(max-width:900px) {
+      .timeline::before { left: 20px; }
+      .timeline-item { width: 100%; padding-left: 60px !important; padding-right: 0 !important; margin-left: 0 !important; text-align: left !important; }
+      .timeline-item::before { left: 13px !important; right: auto !important; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .about-hero { padding: 120px 24px 60px; }
+      .timeline-section, .values-section, .stats-section, .cta-section { padding: 70px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="brand-icon">🏆</div>
+    <h1>RANGE ROVER</h1>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="details.html">Models</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html" class="active">About</a>
+    <a href="register.html" class="nav-cta">Register</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-content">
+    <div class="hero-badge">British Luxury Since 1970</div>
+    <h1>Crafting the <span>Extraordinary</span> Since 1970</h1>
+    <p>Range Rover was born from a single vision: to create a vehicle that combined the refinement and comfort of a luxury saloon with the off-road capability of a Land Rover. Over five decades later, that vision continues to redefine what an SUV can be.</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-header">
+    <div class="section-tag">Our Journey</div>
+    <h2 class="section-title">Heritage Timeline</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">1970</div>
+      <div class="timeline-title">The Original Classic</div>
+      <div class="timeline-desc">The first Range Rover rolled off the production line in Solihull, England. It featured a lightweight aluminium V8 engine, permanent four-wheel drive, and a split tailgate — innovations that changed the automotive world forever.</div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">1981</div>
+      <div class="timeline-title">4-Door Innovation</div>
+      <div class="timeline-desc">The introduction of the four-door Range Rover expanded its appeal to a global audience, blending family practicality with the unmistakable presence of the original design.</div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">1994</div>
+      <div class="timeline-title">Second Generation</div>
+      <div class="timeline-desc">The P38a brought electronic air suspension, traction control, and a more refined interior — cementing Range Rover's position as the world's most capable luxury vehicle.</div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2001</div>
+      <div class="timeline-title">L322 & Modern Luxury</div>
+      <div class="timeline-desc">The third generation introduced monocoque construction, a BMW-derived V8, and a cabin that rivalled the finest executive sedans. Range Rover entered the 21st century as a true global luxury icon.</div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2012</div>
+      <div class="timeline-title">All-Aluminium Revolution</div>
+      <div class="timeline-desc">The L405 featured the world's first all-aluminium SUV body, reducing weight by 420 kg while increasing strength. It redefined efficiency and performance in the luxury SUV segment.</div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-title">Electric Future</div>
+      <div class="timeline-desc">Range Rover continues to lead with electrified powertrains, sustainable materials, and autonomous-ready technology — shaping the future of luxury mobility while honouring its remarkable heritage.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-header">
+    <div class="section-tag">What We Stand For</div>
+    <h2 class="section-title">Our Brand Values</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="values-grid">
+    <div class="value-card fade-in">
+      <div class="value-icon">🎯</div>
+      <h3>Purposeful Design</h3>
+      <p>Every curve, every surface, every material is chosen with intention. Our design philosophy merges timeless elegance with functional innovation.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-icon">🔧</div>
+      <h3>Engineering Excellence</h3>
+      <p>From the first all-aluminium SUV body to today's electrified platforms, we push the boundaries of what automotive engineering can achieve.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-icon">🌱</div>
+      <h3>Sustainable Luxury</h3>
+      <p>We are committed to reducing our environmental footprint through electrified drivetrains, responsibly sourced materials, and carbon-neutral manufacturing goals.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-icon">🤝</div>
+      <h3>Customer Obsession</h3>
+      <p>From bespoke commissioning through our SV Bespoke programme to white-glove after-sales service, every customer experience is crafted to exceed expectations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-row">
+    <div class="stat-box fade-in">
+      <div class="num" data-target="54">0</div>
+      <div class="lbl">Years of Heritage</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num" data-target="8">0</div>
+      <div class="lbl">Million Vehicles Sold</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num" data-target="170">0</div>
+      <div class="lbl">Markets Worldwide</div>
+    </div>
+    <div class="stat-box fade-in">
+      <div class="num" data-target="300">0</div>
+      <div class="lbl">Industry Awards</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-header">
+    <div class="section-tag">Experience It</div>
+    <h2 class="section-title">Be Part of the Legacy</h2>
+    <div class="section-line"></div>
+  </div>
+  <h2>Ready to Experience Range Rover?</h2>
+  <p>Visit our showroom, book a test drive, or speak with our product specialists to discover the Range Rover that fits your life.</p>
+  <div class="hero-buttons">
+    <a href="details.html" class="btn-primary">Explore Models</a>
+    <a href="register.html" class="btn-outline">Join Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>RANGE ROVER</h2>
+      <p>The pinnacle of luxury and performance since 1970. Crafted in Britain, driven by the world.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Models</h4>
+      <ul>
+        <li><a href="details.html">Evoque</a></li>
+        <li><a href="details.html">Sport</a></li>
+        <li><a href="details.html">Velar</a></li>
+        <li><a href="details.html">Defender</a></li>
+        <li><a href="details.html">Classic</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Showroom</h4>
+      <ul>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="details.html">Car Details</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Heritage</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Range Rover. All Rights Reserved.</span>
+    <span>British Luxury Since 1970</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <div class="toast-title" id="toastTitle"></div>
+  <div id="toastBody"></div>
+</div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
