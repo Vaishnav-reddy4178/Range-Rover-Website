@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Models – Range Rover Showroom</title>
+  <meta name="description" content="Compare Range Rover models side by side. See specs, pricing, features, and performance across Evoque, Sport, Velar, Defender and Classic.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .compare-hero {
+      padding: 140px 60px 80px; text-align: center; background: var(--dark-2);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .compare-hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 52px);
+      color: var(--white); margin-bottom: 16px;
+    }
+    .compare-hero p { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+    .compare-section { background: var(--dark); padding: 60px 60px 100px; }
+    .compare-picker {
+      display: flex; gap: 24px; justify-content: center; margin-bottom: 60px; flex-wrap: wrap;
+    }
+    .picker-col {
+      background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
+      padding: 24px; min-width: 220px; text-align: center;
+    }
+    .picker-col label {
+      display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+    }
+    .picker-col select {
+      width: 100%; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); padding: 14px 18px; border-radius: 3px; font-family: 'Outfit', sans-serif;
+      font-size: 14px; outline: none; cursor: pointer;
+    }
+    .picker-col select option { background: var(--dark-3); }
+
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table {
+      width: 100%; border-collapse: collapse; min-width: 700px;
+      background: var(--dark-3); border-radius: 8px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .compare-table thead th {
+      background: var(--dark-2); padding: 24px 20px; font-family: 'Playfair Display', serif;
+      font-size: 20px; color: var(--white); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.06);
+      min-width: 180px; vertical-align: bottom;
+    }
+    .compare-table thead th:first-child {
+      text-align: left; font-family: 'Outfit', sans-serif; font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500;
+      width: 200px; min-width: 160px;
+    }
+    .compare-table thead th .model-img {
+      width: 100%; height: 120px; object-fit: cover; border-radius: 4px;
+      margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .compare-table thead th .model-price {
+      font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--gold);
+      letter-spacing: 0; text-transform: none; font-weight: 600;
+    }
+    .compare-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.2s; }
+    .compare-table tbody tr:hover { background: rgba(201,168,76,0.03); }
+    .compare-table td {
+      padding: 18px 20px; font-size: 14px; color: var(--text); text-align: center;
+    }
+    .compare-table td:first-child {
+      text-align: left; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-muted); font-weight: 500;
+    }
+    .compare-table td.highlight { color: var(--gold); font-weight: 600; }
+    .compare-table tbody tr.section-divider td {
+      background: var(--dark-2); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); padding: 14px 20px; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .compare-table tbody tr.section-divider td:first-child { text-align: center; }
+
+    .compare-actions {
+      display: flex; gap: 16px; justify-content: center; margin-top: 40px; flex-wrap: wrap;
+    }
+
+    .winner-badge {
+      display: inline-block; background: var(--gold); color: var(--dark);
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 2px; margin-top: 6px;
+    }
+
+    .feature-check { color: var(--gold); font-size: 18px; }
+    .feature-cross { color: #666; font-size: 18px; }
+
+    @media(max-width:900px) {
+      .compare-hero { padding: 120px 24px 60px; }
+      .compare-section { padding: 40px 24px 70px; }
+      .picker-col { min-width: 160px; width: 100%; max-width: 280px; }
+      .compare-table td, .compare-table th { padding: 14px 12px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <div class="brand-icon">🏆</div>
+    <h1>RANGE ROVER</h1>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="details.html">Models</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="compare.html" class="active">Compare</a>
+    <a href="register.html" class="nav-cta">Register</a>
+  </nav>
+</header>
+
+<div class="compare-hero">
+  <div class="section-tag">Side by Side</div>
+  <h1>Compare Range Rover Models</h1>
+  <p>Compare specifications, features, and pricing across our entire range to find the perfect Range Rover for your lifestyle.</p>
+</div>
+
+<section class="compare-section">
+  <div class="compare-picker">
+    <div class="picker-col">
+      <label>Choose Model A</label>
+      <select id="pickerA" onchange="updateCompare()">
+        <option value="evoque">Range Rover Evoque</option>
+        <option value="sport">Range Rover Sport</option>
+        <option value="velar">Range Rover Velar</option>
+        <option value="defender">Defender</option>
+        <option value="classic">Range Rover Classic</option>
+      </select>
+    </div>
+    <div class="picker-col">
+      <label>Choose Model B</label>
+      <select id="pickerB" onchange="updateCompare()">
+        <option value="evoque">Range Rover Evoque</option>
+        <option value="sport" selected>Range Rover Sport</option>
+        <option value="velar">Range Rover Velar</option>
+        <option value="defender">Defender</option>
+        <option value="classic">Range Rover Classic</option>
+      </select>
+    </div>
+    <div class="picker-col">
+      <label>Choose Model C</label>
+      <select id="pickerC" onchange="updateCompare()">
+        <option value="evoque">Range Rover Evoque</option>
+        <option value="sport">Range Rover Sport</option>
+        <option value="velar" selected>Range Rover Velar</option>
+        <option value="defender">Defender</option>
+        <option value="classic">Range Rover Classic</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="compare-table-wrap">
+    <table class="compare-table" id="compareTable">
+      <thead>
+        <tr>
+          <th>Specification</th>
+          <th id="thA">
+            <img src="evoque.jpg" alt="Evoque" class="model-img" id="imgA">
+            <div id="nameA">Range Rover Evoque</div>
+            <div class="model-price" id="priceA">₹67,00,000</div>
+          </th>
+          <th id="thB">
+            <img src="sport.jpg" alt="Sport" class="model-img" id="imgB">
+            <div id="nameB">Range Rover Sport</div>
+            <div class="model-price" id="priceB">₹87,00,000</div>
+          </th>
+          <th id="thC">
+            <img src="velar.jpg" alt="Velar" class="model-img" id="imgC">
+            <div id="nameC">Range Rover Velar</div>
+            <div class="model-price" id="priceC">₹1,40,00,000</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="compareBody">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="compare-actions">
+    <a href="details.html" class="btn-primary">View Full Details</a>
+    <a href="register.html" class="btn-outline">Book Test Drive</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>RANGE ROVER</h2>
+      <p>The pinnacle of luxury and performance since 1970.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Models</h4>
+      <ul>
+        <li><a href="details.html">Evoque</a></li>
+        <li><a href="details.html">Sport</a></li>
+        <li><a href="details.html">Velar</a></li>
+        <li><a href="details.html">Defender</a></li>
+        <li><a href="details.html">Classic</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Showroom</h4>
+      <ul>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="details.html">Car Details</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Heritage</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Range Rover. All Rights Reserved.</span>
+    <span>British Luxury Since 1970</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <div class="toast-title" id="toastTitle"></div>
+  <div id="toastBody"></div>
+</div>
+
+<script src="scripts.js"></script>
+<script>
+const compareData = {
+  evoque: {
+    name: 'Range Rover Evoque',
+    price: '₹67,00,000',
+    img: 'evoque.jpg',
+    specs: {
+      'Engine': '1997cc',
+      'Power': '201 bhp @ 5500 rpm',
+      'Torque': '430 Nm @ 1750 rpm',
+      'Transmission': '9-speed Automatic',
+      'Fuel Type': 'Diesel',
+      'Mileage': '15 km/l',
+      'Top Speed': '213 km/h',
+      '0–100 km/h': '8.5 seconds',
+      'Drive Type': 'AWD',
+      'Ground Clearance': '212 mm',
+      'Boot Space': '591 L',
+      'Seating': '5',
+      'Length': '4371 mm',
+      'Width': '1904 mm',
+      'Height': '1649 mm',
+      'Wheelbase': '2681 mm',
+      'Airbags': '7',
+      'Parking Assist': 'Yes',
+      'Panoramic Roof': 'Yes',
+      'Terrain Response': 'Yes',
+      'Cruise Control': 'Yes',
+      'Lane Assist': 'Yes',
+      'Wireless Charging': 'Yes',
+      'Meridian Sound': 'Yes'
+    }
+  },
+  sport: {
+    name: 'Range Rover Sport',
+    price: '₹87,00,000',
+    img: 'sport.jpg',
+    specs: {
+      'Engine': '2997cc',
+      'Power': '345 bhp @ 6500 rpm',
+      'Torque': '495 Nm @ 3500 rpm',
+      'Transmission': '8-speed Automatic',
+      'Fuel Type': 'Petrol / Diesel',
+      'Mileage': '12 km/l',
+      'Top Speed': '234 km/h',
+      '0–100 km/h': '5.9 seconds',
+      'Drive Type': 'AWD',
+      'Ground Clearance': '213 mm',
+      'Boot Space': '784 L',
+      'Seating': '5',
+      'Length': '4879 mm',
+      'Width': '2073 mm',
+      'Height': '1803 mm',
+      'Wheelbase': '2923 mm',
+      'Airbags': '8',
+      'Parking Assist': 'Yes',
+      'Panoramic Roof': 'Yes',
+      'Terrain Response': 'Yes',
+      'Cruise Control': 'Adaptive',
+      'Lane Assist': 'Yes',
+      'Wireless Charging': 'Yes',
+      'Meridian Sound': 'Yes'
+    }
+  },
+  velar: {
+    name: 'Range Rover Velar',
+    price: '₹1,40,00,000',
+    img: 'velar.jpg',
+    specs: {
+      'Engine': '1997cc',
+      'Power': '247 bhp @ 5500 rpm',
+      'Torque': '365 Nm @ 1500 rpm',
+      'Transmission': '8-speed Automatic',
+      'Fuel Type': 'Petrol',
+      'Mileage': '15.8 km/l',
+      'Top Speed': '210 km/h',
+      '0–100 km/h': '8.3 seconds',
+      'Drive Type': 'AWD',
+      'Ground Clearance': '213 mm',
+      'Boot Space': '673 L',
+      'Seating': '5',
+      'Length': '4797 mm',
+      'Width': '1930 mm',
+      'Height': '1665 mm',
+      'Wheelbase': '2874 mm',
+      'Airbags': '8',
+      'Parking Assist': 'Yes',
+      'Panoramic Roof': 'Yes',
+      'Terrain Response': 'Yes',
+      'Cruise Control': 'Adaptive',
+      'Lane Assist': 'Yes',
+      'Wireless Charging': 'Yes',
+      'Meridian Sound': 'Yes'
+    }
+  },
+  defender: {
+    name: 'Defender',
+    price: '₹1,47,00,000',
+    img: 'defender.jpg',
+    specs: {
+      'Engine': '4500cc',
+      'Power': '394 bhp @ 6500 rpm',
+      'Torque': '550 Nm @ 2000 rpm',
+      'Transmission': '8-speed Automatic',
+      'Fuel Type': 'Diesel',
+      'Mileage': '10 km/l',
+      'Top Speed': '240 km/h',
+      '0–100 km/h': '5.7 seconds',
+      'Drive Type': '4WD',
+      'Ground Clearance': '291 mm',
+      'Boot Space': '1075 L',
+      'Seating': '5 / 7',
+      'Length': '4758 mm',
+      'Width': '2008 mm',
+      'Height': '1967 mm',
+      'Wheelbase': '3022 mm',
+      'Airbags': '8',
+      'Parking Assist': 'Yes',
+      'Panoramic Roof': 'Optional',
+      'Terrain Response': 'Yes',
+      'Cruise Control': 'Adaptive',
+      'Lane Assist': 'Yes',
+      'Wireless Charging': 'Yes',
+      'Meridian Sound': 'Yes'
+    }
+  },
+  classic: {
+    name: 'Range Rover Classic',
+    price: '₹55,00,000',
+    img: 'classic.jpg',
+    specs: {
+      'Engine': '3500cc',
+      'Power': '185 bhp @ 4750 rpm',
+      'Torque': '380 Nm @ 2500 rpm',
+      'Transmission': '4-speed Manual',
+      'Fuel Type': 'Petrol',
+      'Mileage': '6 km/l',
+      'Top Speed': '175 km/h',
+      '0–100 km/h': '11.0 seconds',
+      'Drive Type': '4WD',
+      'Ground Clearance': '230 mm',
+      'Boot Space': '450 L',
+      'Seating': '5',
+      'Length': '4445 mm',
+      'Width': '1778 mm',
+      'Height': '1780 mm',
+      'Wheelbase': '2540 mm',
+      'Airbags': '2',
+      'Parking Assist': 'No',
+      'Panoramic Roof': 'No',
+      'Terrain Response': 'No',
+      'Cruise Control': 'No',
+      'Lane Assist': 'No',
+      'Wireless Charging': 'No',
+      'Meridian Sound': 'No'
+    }
+  }
+};
+
+const sections = [
+  { title: 'Performance', keys: ['Engine', 'Power', 'Torque', 'Transmission', 'Fuel Type', 'Mileage', 'Top Speed', '0–100 km/h'] },
+  { title: 'Dimensions', keys: ['Length', 'Width', 'Height', 'Wheelbase', 'Ground Clearance', 'Boot Space', 'Seating'] },
+  { title: 'Safety & Comfort', keys: ['Airbags', 'Parking Assist', 'Cruise Control', 'Lane Assist', 'Panoramic Roof'] },
+  { title: 'Technology', keys: ['Terrain Response', 'Wireless Charging', 'Meridian Sound'] }
+];
+
+function getNumeric(val) {
+  const m = val.match(/[\d.]+/);
+  return m ? parseFloat(m[0]) : 0;
+}
+
+function getUnit(val) {
+  const m = val.match(/[\d.]+\s*(.*)/);
+  return m ? m[1] : '';
+}
+
+function isNumericSpec(key) {
+  return ['Engine', 'Power', 'Torque', 'Mileage', 'Top Speed', 'Ground Clearance', 'Boot Space', 'Length', 'Width', 'Height', 'Wheelbase', 'Airbags', '0–100 km/h'].includes(key);
+}
+
+function highlightClass(a, b, c, key) {
+  if (!isNumericSpec(key)) return '';
+  const vals = [a, b, c].map(v => getNumeric(v));
+  const max = Math.max(...vals);
+  const min = Math.min(...vals);
+  if (max === min) return '';
+
+  // For 0-100, lower is better
+  const lowerIsBetter = key === '0–100 km/h';
+  if (lowerIsBetter) {
+    return [vals[0] === min, vals[1] === min, vals[2] === min];
+  }
+  return [vals[0] === max, vals[1] === max, vals[2] === max];
+}
+
+function updateCompare() {
+  const a = document.getElementById('pickerA').value;
+  const b = document.getElementById('pickerB').value;
+  const c = document.getElementById('pickerC').value;
+  const da = compareData[a], db = compareData[b], dc = compareData[c];
+
+  // Update headers
+  document.getElementById('imgA').src = da.img; document.getElementById('imgA').alt = da.name;
+  document.getElementById('nameA').textContent = da.name; document.getElementById('priceA').textContent = da.price;
+  document.getElementById('imgB').src = db.img; document.getElementById('imgB').alt = db.name;
+  document.getElementById('nameB').textContent = db.name; document.getElementById('priceB').textContent = db.price;
+  document.getElementById('imgC').src = dc.img; document.getElementById('imgC').alt = dc.name;
+  document.getElementById('nameC').textContent = dc.name; document.getElementById('priceC').textContent = dc.price;
+
+  // Build table body
+  let html = '';
+  sections.forEach(sec => {
+    html += `<tr class="section-divider"><td colspan="4">${sec.title}</td></tr>`;
+    sec.keys.forEach(key => {
+      const va = da.specs[key] || '–'; const vb = db.specs[key] || '–'; const vc = dc.specs[key] || '–';
+      const h = highlightClass(va, vb, vc, key);
+      const ca = h ? (h[0] ? 'highlight' : '') : '';
+      const cb = h ? (h[1] ? 'highlight' : '') : '';
+      const cc = h ? (h[2] ? 'highlight' : '') : '';
+      html += `<tr><td>${key}</td><td class="${ca}">${va}</td><td class="${cb}">${vb}</td><td class="${cc}">${vc}</td></tr>`;
+    });
+  });
+  document.getElementById('compareBody').innerHTML = html;
+}
+
+updateCompare();
+</script>
+</body>
+</html>
