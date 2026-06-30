@@ -102,6 +102,43 @@
     .feature-check { color: var(--gold); font-size: 18px; }
     .feature-cross { color: #666; font-size: 18px; }
 
+    .compare-summary-section {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .summary-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      padding: 24px;
+      text-align: left;
+      transition: all 0.3s;
+    }
+    .summary-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .summary-card h4 {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .summary-card .winner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .summary-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     @media(max-width:900px) {
       .compare-hero { padding: 120px 24px 60px; }
       .compare-section { padding: 40px 24px 70px; }
@@ -210,6 +247,8 @@
       </tbody>
     </table>
   </div>
+
+  <div id="compareSummary" class="compare-summary-section"></div>
 
   <div class="compare-actions">
     <a href="details.html" class="btn-primary">View Full Details</a>
@@ -476,6 +515,9 @@ function updateCompare() {
   document.getElementById('imgC').src = dc.img; document.getElementById('imgC').alt = dc.name;
   document.getElementById('nameC').textContent = dc.name; document.getElementById('priceC').textContent = dc.price;
 
+  // Track wins per column
+  let winCounts = [0, 0, 0];
+
   // Build table body
   let html = '';
   sections.forEach(sec => {
@@ -486,10 +528,71 @@ function updateCompare() {
       const ca = h ? (h[0] ? 'highlight' : '') : '';
       const cb = h ? (h[1] ? 'highlight' : '') : '';
       const cc = h ? (h[2] ? 'highlight' : '') : '';
-      html += `<tr><td>${key}</td><td class="${ca}">${va}</td><td class="${cb}">${vb}</td><td class="${cc}">${vc}</td></tr>`;
+
+      if (h) {
+        if (h[0]) winCounts[0]++;
+        if (h[1]) winCounts[1]++;
+        if (h[2]) winCounts[2]++;
+      }
+
+      // Formatting checkmarks
+      let displayA = va, displayB = vb, displayC = vc;
+      if (va === 'Yes') displayA = '<span class="feature-check">✓</span>';
+      if (va === 'No') displayA = '<span class="feature-cross">✕</span>';
+      if (vb === 'Yes') displayB = '<span class="feature-check">✓</span>';
+      if (vb === 'No') displayB = '<span class="feature-cross">✕</span>';
+      if (vc === 'Yes') displayC = '<span class="feature-check">✓</span>';
+      if (vc === 'No') displayC = '<span class="feature-cross">✕</span>';
+
+      html += `<tr><td>${key}</td><td class="${ca}">${displayA}</td><td class="${cb}">${displayB}</td><td class="${cc}">${displayC}</td></tr>`;
     });
   });
   document.getElementById('compareBody').innerHTML = html;
+
+  // Calculate recommendation cards
+  const cars = [da, db, dc];
+
+  let maxWinIdx = 0;
+  if (winCounts[1] > winCounts[maxWinIdx]) maxWinIdx = 1;
+  if (winCounts[2] > winCounts[maxWinIdx]) maxWinIdx = 2;
+  const performanceChamp = cars[maxWinIdx];
+
+  const parsePrice = p => parseInt(p.replace(/[^0-9]/g, '')) || 0;
+  let minPriceIdx = 0;
+  if (parsePrice(cars[1].price) < parsePrice(cars[minPriceIdx].price)) minPriceIdx = 1;
+  if (parsePrice(cars[2].price) < parsePrice(cars[minPriceIdx].price)) minPriceIdx = 2;
+  const valueChoice = cars[minPriceIdx];
+
+  let techCounts = [0, 0, 0];
+  const techKeys = ['Terrain Response', 'Wireless Charging', 'Meridian Sound', 'Parking Assist', 'Panoramic Roof', 'Cruise Control', 'Lane Assist'];
+  techKeys.forEach(key => {
+    if (da.specs[key] === 'Yes' || da.specs[key] === 'Adaptive') techCounts[0]++;
+    if (db.specs[key] === 'Yes' || db.specs[key] === 'Adaptive') techCounts[1]++;
+    if (dc.specs[key] === 'Yes' || dc.specs[key] === 'Adaptive') techCounts[2]++;
+  });
+  let maxTechIdx = 0;
+  if (techCounts[1] > techCounts[maxTechIdx]) maxTechIdx = 1;
+  if (techCounts[2] > techCounts[maxTechIdx]) maxTechIdx = 2;
+  const techSpecialist = cars[maxTechIdx];
+
+  const summaryHtml = `
+    <div class="summary-card">
+      <h4>Specification Leader</h4>
+      <div class="winner-title">${performanceChamp.name}</div>
+      <p>Secured the highest rating in <strong>${winCounts[maxWinIdx]} key metrics</strong> compared side-by-side, demonstrating superior mechanical specifications.</p>
+    </div>
+    <div class="summary-card">
+      <h4>Most Economical Option</h4>
+      <div class="winner-title">${valueChoice.name}</div>
+      <p>Priced at <strong>${valueChoice.price}</strong>, this model offers the most competitive entry point to the prestigious Range Rover heritage.</p>
+    </div>
+    <div class="summary-card">
+      <h4>Technology & Comfort Suite</h4>
+      <div class="winner-title">${techSpecialist.name}</div>
+      <p>Equipped with <strong>${techCounts[maxTechIdx]} luxury driving features</strong>, offering the ultimate digital cabin experience.</p>
+    </div>
+  `;
+  document.getElementById('compareSummary').innerHTML = summaryHtml;
 }
 
 updateCompare();
