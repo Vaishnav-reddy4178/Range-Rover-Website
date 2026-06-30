@@ -133,31 +133,108 @@ function showToast(title, body) {
   setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
+
+// ── BOOKING MODAL INJECTION & LOGIC ────────────────────────
+function ensureBookingModalExists() {
+  if (document.getElementById('bookingModalOverlay')) return;
+
+  const modalHtml = `
+    <div class="modal-overlay" id="bookingModalOverlay" onclick="closeBookingModal(event)">
+      <div class="modal" id="bookingModal">
+        <button class="modal-close" onclick="closeBookingModalBtn()">✕</button>
+        <h3 id="bookingModalTitle">Book Test Drive</h3>
+        <p id="bookingModalSubtitle" style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;"></p>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+          <input type="hidden" id="bookingCarName">
+          <input type="hidden" id="bookingMode">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="bookingName" style="display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Full Name</label>
+            <input type="text" id="bookingName" required style="width: 100%; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 12px; border-radius: 3px; font-family: inherit; outline: none;">
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="bookingPhone" style="display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Phone Number (10 digits)</label>
+            <input type="tel" id="bookingPhone" pattern="[0-9]{10}" required style="width: 100%; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 12px; border-radius: 3px; font-family: inherit; outline: none;">
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="bookingLocation" style="display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Preferred Showroom</label>
+            <select id="bookingLocation" required style="width: 100%; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 12px; border-radius: 3px; font-family: inherit; outline: none;">
+              <option value="New Delhi">New Delhi (CP Showroom)</option>
+              <option value="Mumbai">Mumbai (Worli Showroom)</option>
+              <option value="Bengaluru">Bengaluru (Lavelle Road Showroom)</option>
+              <option value="Chennai">Chennai (OMR Showroom)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label for="bookingDate" style="display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Preferred Date</label>
+            <input type="date" id="bookingDate" required style="width: 100%; background: var(--dark-2); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 12px; border-radius: 3px; font-family: inherit; outline: none;">
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function openBookingModal(carName, mode) {
+  ensureBookingModalExists();
+  document.getElementById('bookingCarName').value = carName;
+  document.getElementById('bookingMode').value = mode;
+
+  const title = mode === 'test-drive' ? 'Book Test Drive' : 'Request Quotation & Booking';
+  const subtitle = mode === 'test-drive' ? `Experience the thrill of the ${carName}` : `Initiate your order for the exclusive ${carName}`;
+
+  document.getElementById('bookingModalTitle').textContent = title;
+  document.getElementById('bookingModalSubtitle').textContent = subtitle;
+
+  // Set default date to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  document.getElementById('bookingDate').value = tomorrow.toISOString().substring(0, 10);
+
+  document.getElementById('bookingModalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBookingModal(e) {
+  if (e.target === document.getElementById('bookingModalOverlay')) closeBookingModalBtn();
+}
+
+function closeBookingModalBtn() {
+  const overlay = document.getElementById('bookingModalOverlay');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function submitBooking(e) {
+  e.preventDefault();
+  const carName = document.getElementById('bookingCarName').value;
+  const mode = document.getElementById('bookingMode').value;
+  const name = document.getElementById('bookingName').value;
+  const phone = document.getElementById('bookingPhone').value;
+  const location = document.getElementById('bookingLocation').value;
+  const date = document.getElementById('bookingDate').value;
+
+  closeBookingModalBtn();
+
+  if (mode === 'test-drive') {
+    showToast('Test Drive Booked! 🎉', `Thank you, ${name}! Your test drive for ${carName} is scheduled on ${date} at our ${location} showroom.`);
+  } else {
+    showToast('Booking Initiated! 🏆', `Congratulations, ${name}! Our executive from ${location} showroom will contact you shortly regarding the ${carName}.`);
+  }
+  document.getElementById('bookingForm').reset();
+}
+
 // ── BOOK TEST DRIVE ────────────────────────────────────────
 function bookTestDrive(carName) {
-  const name = window.prompt(`Book a test drive for the ${carName}.\n\nEnter your name:`);
-  if (!name) return;
-  const phone = window.prompt('Enter your phone number (10 digits):');
-  if (!phone || !/^[0-9]{10}$/.test(phone)) {
-    showToast('Invalid Number', 'Please enter a valid 10-digit phone number.');
-    return;
-  }
-  showToast('Test Drive Booked! 🎉', `Thank you, ${name}! We'll call you at ${phone} to confirm your ${carName} test drive.`);
+  openBookingModal(carName, 'test-drive');
 }
 
 // ── BOOK CAR ───────────────────────────────────────────────
 function bookCar(carName) {
-  const name = window.prompt(`Booking: ${carName}\n\nEnter your full name:`);
-  if (!name) return;
-  const location = window.prompt('Enter your city / preferred showroom location:');
-  if (!location) { showToast('Booking Cancelled', 'Location is required to proceed.'); return; }
-  const phone = window.prompt('Enter your phone number (10 digits):');
-  if (!phone || !/^[0-9]{10}$/.test(phone)) {
-    showToast('Invalid Number', 'Please enter a valid 10-digit phone number.');
-    return;
-  }
-  showToast('Booking Confirmed! 🏆', `Thank you, ${name}! Your ${carName} booking from ${location} is confirmed. We'll contact you at ${phone}.`);
+  openBookingModal(carName, 'purchase');
 }
+
 
 // ── CONTACT FORM ───────────────────────────────────────────
 function submitContact(e) {
