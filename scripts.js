@@ -310,3 +310,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// ── LUXURY THEME SWITCHER ─────────────────────────────────
+function initializeThemeToggle() {
+  if (document.getElementById('themeToggleBtn')) return;
+  const navbarNav = document.querySelector('.navbar nav');
+  if (!navbarNav) return;
+
+  const toggleBtn = document.createElement('button');
+  toggleBtn.id = 'themeToggleBtn';
+  toggleBtn.className = 'theme-toggle-btn';
+  toggleBtn.setAttribute('aria-label', 'Toggle light/dark theme');
+  toggleBtn.style.marginLeft = '16px';
+
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  if (currentTheme === 'light') {
+    document.body.classList.add('light-theme');
+    toggleBtn.innerHTML = '🌙';
+  } else {
+    toggleBtn.innerHTML = '☀️';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-theme');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    toggleBtn.innerHTML = isLight ? '🌙' : '☀️';
+  });
+
+  navbarNav.appendChild(toggleBtn);
+}
+
+document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  initializeThemeToggle();
+}
+
